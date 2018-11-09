@@ -1,0 +1,45 @@
+<div class="d-flex flex-column flex-fill">
+  <div class="d-flex flex-row form-group">
+    <label class="custom-radio col-form-label" ng-disabled="disabled">
+      <input type="radio" name="dateTypeRadios" value="notime" data-ng-model="anydate.dateType"
+          data-ng-disabled="disabled">
+      No Time
+    </label>
+    <label class="custom-control custom-radio col-form-label" ng-disabled="disabled">
+      <input type="radio" name="dateTypeRadios" value="instant" data-ng-model="anydate.dateType"
+          data-ng-disabled="disabled">
+      Instant
+    </label>
+    <label class="custom-control custom-radio col-form-label" ng-disabled="disabled">
+      <input type="radio" name="dateTypeRadios" value="range" data-ng-model="anydate.dateType"
+          data-ng-disabled="disabled">
+      Range
+    </label>
+    <popover class="ml-3" ng-if="help" title="help.title" content="help.content" pos="help.pos"></popover>
+  </div>
+
+  <div ng-form="anyDateForm">
+    <div class="d-flex flex-row form-group">
+      <div data-ng-if="anydate.dateType != 'notime'" data-ng-class="{'text-danger': anyDateForm.startDate.$dirty && (!anydate.timesValid || (!anydate.startDate && !anydate.startUnknown))}">
+        <date-time data-value="anydate.startDate" x-disabled="anydate.startUnknown || disabled"
+          is-required="anydate.dateType != 'notime' && !anydate.startUnknown">
+        </date-time>
+        <input type="hidden" name="startDate" data-ng-required="anydate.dateType != 'notime' && !anydate.startUnknown" data-ng-model="anydate.startDate"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row form-group">
+    <div data-ng-if="anydate.dateType == 'range'" data-ng-class="{'text-danger': anyDateForm.endDate.$dirty && (!anydate.timesValid || (!anydate.endDate && !anydate.endUnknown))}">
+      <date-time class="date-time" data-value="anydate.endDate" x-disabled="anydate.endUnknown || disabled"
+        is-required="anydate.dateType == 'range' && !anydate.endUnknown">
+      </date-time>
+      <input type="hidden" name="endDate" data-ng-required="anydate.dateType == 'range' && !anydate.endUnknown" data-ng-model="anydate.endDate"/>
+    </div>
+  </div>
+
+  <div data-ng-show="anydate.dateType == 'range' && !anydate.timesValid">
+    <input type="hidden" data-ng-required="anydate.dateType == 'range'" data-ng-model="anydate.timesValid"/>
+    <span class="invalid-feedback d-block">End date must be after start date!</span>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div id="wizard" class="flex-fill w-100 d-flex flex-column" ng-class="wiz.wizardClass">
+  <div class="modal-body flex-fill d-flex">
+    <div class="container-fluid flex-fill d-flex">
+      <div class="row flex-fill">
+        <div class="col-3 d-flex">
+          <div class="border flex-fill">
+            <div class="list-group list-group-flush">
+              <a href="" class="list-group-item list-group-item-action border-bottom" ng-repeat="step in wiz.steps"
+                  ng-class="{'active': wiz.isActive(step)}" ng-click="wiz.setStepIndex($index)">
+                <i class="fa fa-fw" ng-class="wiz.getStepIcon(step)"></i>
+                <span ng-class="{'font-warning': wiz.getStepState(step) == 'error'}">
+                  {{$index + 1}}. {{step.getTitle()}}
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div id="js-wizard-step-content" class="d-flex col-9 flex-fill u-overflow-y-auto"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" ng-click="wiz.prev()" title="Previous step" ng-disabled="wiz.activeIndex <= 0 || wiz.loading">
+      <i class="fa fa-chevron-circle-left"></i>
+      Prev
+    </button>
+    <button class="btn btn-secondary" ng-click="wiz.next()" title="Next step" ng-disabled="!wiz.canContinue() || wiz.loading">
+      <i class="fa fa-chevron-circle-right"></i>
+      Next
+    </button>
+    <button class="btn btn-primary" ng-click="wiz.accept()" ng-disabled="!wiz.canAccept() || wiz.loading">
+      <i class="fa" ng-class="wiz.loading && 'fa-spin fa-spinner' || 'fa-check'"></i>
+      {{wiz.loading ? 'Loading' : 'Done'}}
+    </button>
+    <button class="btn btn-secondary" ng-click="wiz.cancel()">
+      <i class="fa fa-ban"></i>
+      Cancel
+    </button>
+  </div>
+</div>

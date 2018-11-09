@@ -1,0 +1,20 @@
+<div class="flex-fill w-100 d-flex flex-column flex-fill">
+  <div class="modal-body d-flex">
+    <form class="flex-fill" ng-class="formClass" name="confirmForm"
+        ng-submit="confirm.confirm()" novalidate>
+      <span class="js-confirm-text" ng-transclude></span>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" type="submit" ng-class="yesButtonClass" ng-click="confirm.confirm()"
+        ng-disabled="confirmForm.$invalid || !valid" title="{{yesButtonTitle}}">
+      <i ng-class="yesIcon" ng-if="yesIcon"></i>
+      {{yesText}}
+    </button>
+    <button class="btn" type="button" ng-class="noButtonClass" ng-if="noIcon && noText && !hideCancel"
+        ng-click="confirm.cancel()" title="{{noButtonTitle}}">
+      <i ng-class="noIcon" ng-if="noIcon"></i>
+      {{noText}}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="d-flex flex-column flex-fill">
+  <ng-form class="container-fluid" name="csvForm" novalidate>
+    <div class="form-row form-group">
+      <div class="row col-6">
+        <label class="col-form-label col-4">Header Row</label>
+        <spinner class="col-3"
+            min="1"
+            max="config.linePreview.length - 1"
+            step="1"
+            value="config.headerRow"
+            name="headerRow"
+            live="false"
+            x-disabled="!config.useHeader">
+        </spinner>
+        <input class="form-check-input position-relative ml-0" type="checkbox" ng-model="config.useHeader"
+            ng-change="configStep.updatePreview()">
+      </div>
+      <div class="row col-6" title="Specify the character used to separate data fields in the file.">
+        <label class="col-form-label col-4">Delimiter</label>
+        <div class="col-8">
+          <select class="custom-select" ng-model="config.delimiter" ng-change="configStep.updatePreview()"
+              ng-options="value as key for (key, value) in configStep.delimiters"></select>
+        </div>
+      </div>
+    </div>
+    <div class="form-row form-group">
+      <div class="row col-6">
+        <label class="col-form-label col-4">Data Row</label>
+        <spinner class="col-3"
+            min="config.useHeader ? (config.headerRow + 1) : 1"
+            max="config.linePreview.length"
+            step="1"
+            value="config.dataRow"
+            name="dataRow"
+            live="false">
+        </spinner>
+      </div>
+      <div class="row col-6" title="Specify the comment character for the file. Lines beginning with this character will be ignored.">
+        <label class="col-form-label col-4">Comment</label>
+        <div class="col-8">
+          <select class="custom-select" ng-model="config.commentChar" ng-change="configStep.updatePreview()"
+              ng-options="value as key for (key, value) in configStep.commentChars"></select>
+        </div>
+      </div>
+    </div>
+  </ng-form>
+  <div class="d-flex flex-fill flex-column">
+    <div class="d-flex flex-fill mb-2 c-config-step__preview-grid u-mvh-25">
+      <slickgrid class="border no-header text-monospace"
+          x-data="configStep.linePreviewRows"
+          columns="configStep.linePreviewColumns"
+          options="configStep.linePreviewOptions"
+          selected="previewSelection"
+          resize-with=".js-window">
+      </slickgrid>
+    </div>
+    <div class="d-flex flex-fill c-config-step__wizard-grid">
+      <wizardpreview config="config"></wizardpreview>
+    </div>
+  </div>
+</div>

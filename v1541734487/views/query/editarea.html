@@ -1,0 +1,12 @@
+<div>
+  <div class="modal-body">
+    <form name="areaForm" ng-submit="ctrl.accept()">
+      <basicinfo config="config" columns="columns"></basicinfo>
+      <input class="form-control d-none" type="submit">
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ctrl.accept()" ng-disabled="areaForm.$invalid"><i class="fa fa-check"></i> Save</button>
+    <button class="btn btn-secondary" ng-click="ctrl.close()"><i class="fa fa-ban"></i> Cancel</button>
+  </div>
+</div>

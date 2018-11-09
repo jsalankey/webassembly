@@ -1,0 +1,27 @@
+<div>
+  <div ng-if="exportoptions.sourceItems.length > 0">
+    <div ng-if="!allowMultiple">
+      <em>The current export type only supports exporting a single source.</em>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input id="js-export-options__useselected" type="checkbox" name="exportoptions.useSelected"
+          ng-model="exportoptions.useSelected" ng-change="exportoptions.updateItems()" class="custom-control-input"/>
+      <label for="js-export-options__useselected" class="custom-control-label"
+        title="If checked, only selected features will be exported. If unchecked or nothing is selected, all visible features will be exported.">
+        Export Selected Features
+      </label>
+    </div>
+    <checklist name="sourcelist" allow-multiple="allowMultiple" items="exportoptions.sourceItems" class="border"></checklist>
+  </div>
+  <div ng-if="exportoptions.sourceItems.length <= 0">
+    <i class="fa fa-warning"></i>
+    <em>There are no visible sources to export. Please add at least one source and make sure it is visible.</em>
+  </div>
+  <div ng-if="exportoptions.sourceItems.length > 0 && showCount" ng-class="{'text-warning': exportoptions.count <= 0, 'text-success': exportoptions.count > 0}">
+    <i class="fa fa-warning" ng-if="exportoptions.count <= 0"></i>
+    <ng-pluralize count="exportoptions.count" ng-class="{'font-italic': exportoptions.count <= 0}" when="{'0': 'Nothing to export. Please choose one or more sources with loaded data.',
+               'one': 'Exporting {} feature.',
+               'other': 'Exporting {} features.'}">
+  </div>
+  <em ng-if="showLabels">Labels can be configured via the Layers window.</em>
+</div>

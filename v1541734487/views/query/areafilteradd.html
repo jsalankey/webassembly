@@ -1,0 +1,39 @@
+<div class="d-flex flex-column flex-fill">
+  <div class="modal-body d-flex flex-column">
+    <div class="js-filters-header">
+      <b><i class="fa fa-fw fa-filter"></i>Choose filters to add</b>
+      <input class="form-control" type="text" ng-model="filterTerm" ng-change="afa.searchFilters()" placeholder="Search filters"/>
+    </div>
+    <div class="js-filter-tree d-flex" autoheight="50%" siblings=".js-areas-header, .js-filters-header, js-area-tree">
+      <slicktree x-data="filters" selected="selected" show-root="true" multi-select="true"></slicktree>
+    </div>
+
+    <div class="js-areas-header">
+      <b>
+        <i class="fa fa-fw fa-star-o"></i>Choose areas to add
+        <div class="float-right">
+          <button class="btn btn-secondary btn-sm" ng-click="afa.scrollToMap()" title="Scroll to the map to preview your areas"><i class="fa fa-globe color-globe"></i></button>
+          <button class="btn btn-secondary btn-sm" ng-click="afa.launchAddObjectAreas()" title="Add areas from Objects">
+            <i class="fa fa-cubes"></i>
+            <i class="fa fa-plus fa-superscript-modifier"></i>
+          </button>
+        </div>
+      </b>
+      <div class="row">
+        <label class="col-form-label text-right col-auto">Group By</label>
+        <div class="col form-inline">
+          <select class="custom-select" ng-model="areaView" ng-change="afa.searchAreas()" ng-options="key for (key, value) in areaViews"/>
+        </div>
+      </div>
+      <input class="form-control" type="text" ng-model="areaTerm" ng-change="afa.searchAreas()" placeholder="Search areas"/>
+    </div>
+    <div class="js-area-tree d-flex" autoheight="50%" siblings=".js-areas-header, .js-filters-header, js-filter-tree">
+      <slicktree x-data="areas" selected="selected" show-root="true" multi-select="true"></slicktree>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <span ng-bind-html="afa.countText"></span>
+    <button class="btn btn-primary" ng-click="afa.add()" ng-disabled="afa.addDisabled"><i class="fa fa-plus"></i> Add</button>
+    <button class="btn btn-secondary" ng-click="afa.close()"><i class="fa fa-ban"></i> Cancel</button>
+  </div>
+</div>

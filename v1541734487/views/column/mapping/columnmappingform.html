@@ -1,0 +1,50 @@
+<div class="d-flex flex-column flex-fill">
+  <div class="d-flex flex-column modal-body">
+    <form class="container" name="cmForm">
+      <div class="form-group row">
+        <label class="col-2 text-right u-required">Name</label>
+        <input class="form-control col-6" type="text" name="name" ng-model="columnMapping.name" ng-maxlength="100" required/>
+        <span class="form-text invalid-feedback col" ng-if="cmForm.name.$error.maxlength">Name is too long!</span>
+        <span class="form-text invalid-feedback col" ng-if="cmForm.name.$error.required">Required!</span>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 text-right">Description</label>
+        <input class="form-control col-6" type="text" class="column-mapping-form__description" name="description"
+            ng-model="columnMapping.description" ng-maxlength="1000" ng-submit="cmFormCtrl.confirm()"/>
+        <span class="form-text invalid-feedback col" ng-if="cmForm.description.$error.maxlength">Description is too long!</span>
+        <span class="form-text invalid-feedback col" ng-if="cmForm.description.$error.required">Required!</span>
+      </div>
+    </form>
+    <div class="form-group">
+      <button class="btn btn-secondary" ng-click="cmFormCtrl.add()">
+        <i class="fa fa-plus"></i>
+        Add Association
+      </button>
+    </div>
+    <div class="d-flex flex-column flex-fill">
+      <columnmodeltree class="no-hover" x-data="cmFormCtrl.tree" disable-selection="true"></columnmodeltree>
+    </div>
+  </div>
+
+  <div class="d-flex modal-footer">
+    <div class="col" ng-if="cmForm.$error.duplicateLayer || cmForm.$error.notEnoughLayers || cmForm.$error.reusedColumn">
+      <i class="fa fa-warning text-warning"></i>
+      <span ng-if="cmForm.$error.duplicateLayer" ng-bind-html="cmFormCtrl.duplicateLayerText"></span>
+      <span ng-if="cmForm.$error.notEnoughLayers" ng-bind-html="cmFormCtrl.notEnoughLayerText"></span>
+      <span ng-if="!(cmForm.$error.notEnoughLayers || cmForm.$error.duplicateLayer) && cmForm.$error.reusedColumn"
+          ng-bind-html="cmFormCtrl.otherCMText"></span>
+    </div>
+
+    <div>
+      <button class="btn btn-primary" ng-click="cmFormCtrl.confirm()" ng-disabled="!cmFormCtrl.validate() && cmForm.$invalid">
+        <i class="fa fa-check"></i>
+        OK
+      </button>
+      <button class="btn btn-secondary" ng-click="cmFormCtrl.cancel()">
+        <i class="fa fa-ban"></i>
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

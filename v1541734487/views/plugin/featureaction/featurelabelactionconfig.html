@@ -1,0 +1,30 @@
+<div>
+  <labelcontrols
+      labels="config.labels"
+      columns="columns"
+      label-color="color"
+      label-size="size"
+      always-show-labels="false"
+      required="true">
+  </labelcontrols>
+
+  <div class="row ml-0 mt-1">
+    <div class="custom-control custom-checkbox">
+      <input class="custom-control-input" type="checkbox" name="addCustomLabel" id="feature-label-action-config"
+            ng-model="ctrl.addCustomLabel"
+            ng-change="ctrl.updateCustomColumn()" />
+      <label class="custom-control-label" title="Add a custom label to each feature" for="feature-label-action-config">
+        Add Custom Label
+      </label>
+    </div>
+    <popover ng-if="ctrl.showCustomWarning" class="animate-fade col text-left"
+        x-title="'Custom Label Display'"
+        x-content="ctrl.customLabelWarning"
+        x-pos="'right'"
+        x-icon="'fa fa-warning text-warning'">
+    </popover>
+  </div>
+  <div ng-if="ctrl.addCustomLabel">
+    <addcolumnform name="config.customName" value="config.customValue" validators="ctrl.validators"></addcolumnform>
+  </div>
+</div>

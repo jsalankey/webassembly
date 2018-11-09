@@ -1,0 +1,27 @@
+<div class="js-wizard-preview d-flex flex-column flex-fill" ng-show="config.preview.length && config.columns.length">
+  <div class="ml-2 mb-1" ng-if="config.columns[0].header">
+    <i class="fa fa-info-circle"></i>
+    Toggle checkboxes to control which columns are imported. You must choose at least two columns.
+  </div>
+  <div class="d-flex flex-column flex-fill" ng-if="config.columns[0].header">
+    <slickheaderbutton
+        x-data="config.preview"
+        columns="config.columns"
+        options="wizPreview.options"
+        selected="config.previewSelection"
+        on-command="wizPreview.onCommand"
+        resize-with=".js-window">
+    </slickheaderbutton>
+  </div>
+
+
+  <div class="d-flex flex-fill" ng-if="!config.columns[0].header">
+    <slickgrid
+        x-data="config.preview"
+        columns="config.columns"
+        options="wizPreview.options"
+        selected="config.previewSelection"
+        resize-with=".js-window">
+    </slickgrid>
+  </div>
+</div>

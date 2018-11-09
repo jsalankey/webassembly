@@ -1,0 +1,16 @@
+<div class="modal-content">
+  <div class="modal-body">
+    <h4>{{confctrl.message}}</h4>
+    <h5>{{confctrl.submessage}}</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-class="confctrl.yesClass" ng-disabled="confctrl.saving" ng-click="confctrl.confirmClick()" >
+      <i class="fa" ng-class="confctrl.saving && 'fa-spin fa-spinner' || confctrl.yesIcon"></i>
+      Delete
+    </button>
+    <button type="button" class="btn btn-secondary" ng-disabled="confctrl.saving" ng-click="confctrl.cancelClick()">
+      <i class="fa fa-times"></i>
+      Cancel
+    </button>
+  </div>
+</div>

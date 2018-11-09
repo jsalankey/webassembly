@@ -1,0 +1,18 @@
+<div class="flex-fill w-100 d-flex flex-column">
+  <div class="modal-body">
+    <form name="addColumnForm" ng-submit="addcolumn.finish()" novalidate>
+      <addcolumnform name="addcolumn.name" value="addcolumn.value" validators="addcolumn.validators"></addcolumnform>
+      <input type="submit" class="d-none"/>
+    </form>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="addcolumn.finish()" ng-disabled="addColumnForm.$invalid">
+        <i class="fa fa-check"></i>
+        OK
+      </button>
+      <button class="btn btn-secondary" ng-click="addcolumn.cancel()">
+        <i class="fa fa-ban"></i>
+        Cancel
+      </button>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="flex-fill w-100 d-flex flex-column">
+  <div class="modal-body">
+    <form name="choiceForm" class="d-flex flex-column">
+      <div ng-repeat="match in matched" ng-class="{'u-bg-body' : $index % 2 == 0}" class="flex-row border">
+        <div class="col">
+          <a ng-click="columnActionPrompt.executeMatch(match, value)" href="#" 
+             title="{{columnActionPrompt.getToolTip(match, value)}}" ng-bind-html="columnActionPrompt.getDescription(match)"></a>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div>
+      <button class="btn btn-primary" ng-click="columnActionPrompt.close();">
+        <i class="fa fa fa-ban"></i>
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

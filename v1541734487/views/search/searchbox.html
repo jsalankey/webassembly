@@ -1,0 +1,90 @@
+<div class="d-flex o-search-box c-search-box">
+  <form ng-submit="searchBox.search()" class="flex-shrink-0 w-100">
+    <div ng-show="searchBox.searchOptions.length > 0" class="input-group">
+      <div class="dropdown input-group-prepend">
+        <button class="c-search-box__dropdown btn form-control w-auto border border-right-0"
+            type="button"
+            ng-click="searchBox.toggleSearchOptions($event)"
+            title="Show/hide search options">
+          <i class="fa fa-fw fa-caret-down"></i>
+        </button>
+      </div>
+      <div class="dropdown-menu w-100 js-searchbox__search-options" ng-class="{'show': searchBox.showSearchOptions}">
+        <div class="d-flex flex-row dropdown-header" ng-if="searchBox.searchOptions.length > 1">
+          <div class="flex-fill my-auto">Search Types</div>
+          <div ng-if="searchBox.allowMultiple">
+            <button class="btn btn-secondary btn-sm" type="button" ng-click="searchBox.toggleAll(true)"
+                title="Enable all search types">
+              <i class="fa fa-check-square-o"></i>
+              All
+            </button>
+            <button class="btn btn-secondary btn-sm" type="button" ng-click="searchBox.toggleAll(false)"
+                title="Disable all search types">
+              <i class="fa fa-square-o"></i>
+              None
+            </button>
+          </div>
+        </div>
+        <div ng-if="searchBox.searchOptions.length > 1">
+          <div ng-if="searchBox.allowMultiple" ng-repeat="groupName in searchBox.providerGroups">
+            <span class="dropdown-item text-truncate" ng-click="searchBox.toggleGroup(groupName)">
+              <i class="fa" ng-class="searchBox.getGroupIcon(groupName)"></i>
+              {{groupName}}
+            </span>
+            <a class="dropdown-item text-truncate" href="" ng-repeat="search in searchBox.getSearchOptionsGroup(groupName)"
+                ng-click="searchBox.toggleSearch(search)">
+                <i class="ml-3 fa" ng-class="searchBox.getSearchIcon(search)"></i>
+              {{searchBox.getSearchName(search)}}
+            </a>
+          </div>
+          <a class="dropdown-item text-truncate" href="" ng-repeat="search in searchBox.searchOptionsNoGroup"
+              ng-click="searchBox.toggleSearch(search)"
+              ng-class="{'font-weight-bold': !searchBox.allowMultiple && searchBox.isSearchEnabled(search)}">
+            <i class="fa" ng-if="searchBox.allowMultiple || searchBox.isSearchEnabled(search)"
+                ng-class="searchBox.getSearchIcon(search)"></i>
+            {{searchBox.getSearchName(search)}}
+          </a>
+        </div>
+        <div ng-if="searchBox.favorites.length > 0">
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-header">Favorite Searches</div>
+          <div ng-if="searchBox.favorites && searchBox.favorites.length > 0">
+            <a class="dropdown-item text-truncate" href="" ng-repeat="fav in searchBox.favorites"
+                ng-click="searchBox.favoriteSearch(fav)" title="{{fav.title}}">
+              <i ng-if="searchBox.isFavoriteActive(fav)" class="fa fa-angle-double-right"></i> {{fav.name}} <span class="font-italic">({{fav.type}})</span>
+            </a>
+          </div>
+        </div>
+        <div ng-if="searchBox.recentSearches && searchBox.recentSearches.length > 0" class="js-searchbox__recent-searches">
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-header">Recent Searches</div>
+          <a class="dropdown-item text-truncate" href="" ng-repeat="recent in searchBox.recentSearches"
+              ng-click="searchBox.setFromRecent(recent)" title="{{searchBox.getRecentTitle(recent)}}">
+            {{recent.term}} <span class="font-italic">{{searchBox.getRecentDetails(recent)}}</span>
+          </a>
+        </div>
+        <div ng-if="!searchBox.recentSearches.length && !searchBox.favorites.length && searchBox.searchOptions.length <= 1" class="text-center">
+          <small>Favorite searches and Recent searches will be added here. Search Away!</small>
+        </div>
+      </div>
+
+      <input class="c-search-box__input form-control border border-left-0 js-searchbox__typeahead" ng-class="{'border-right-0': showClear}"
+          type="text"
+          ng-model="searchBox.searchTerm"
+          ng-change="searchBox.refreshAutocomplete()"
+          placeholder="{{searchBox.getPlaceholderText()}}"
+          data-provide="typeahead" />
+      <div class="input-group-append">
+        <button ng-if="showClear" class="btn border border-left-0 form-control w-auto"
+            type="button"
+            ng-click="searchBox.clear()"
+            title="Clear search">
+          <i class="fa fa-times"></i>
+        </button>
+        <button class="btn btn-primary" type="submit">
+          <i class="fa fa-fw fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

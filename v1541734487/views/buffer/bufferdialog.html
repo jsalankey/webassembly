@@ -1,0 +1,21 @@
+<div>
+  <div class="modal-body">
+    <div ng-form="bufferDialogForm">
+      <bufferform config="config" init-sources="sources" show-source-picker="buffer.showSourcePicker" warning-message="buffer.warningMessage"></bufferform>
+    </div>
+    <div>
+      <i class="fa fa-warning text-warning" ng-if="buffer.warningMessage || !buffer.isDataReady()"></i>
+      <span ng-class="{'font-italic': buffer.warningMessage || !buffer.isDataReady()}" ng-bind-html="buffer.warningMessage || buffer.getStatus()"></span>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="buffer.confirm()" ng-disabled="buffer.loading || bufferDialogForm.$invalid || buffer.warningMessage || !buffer.isDataReady()">
+      <i class="fa" ng-class="buffer.loading && 'fa-spin fa-spinner' || 'fa-check'"></i>
+      {{buffer.loading ? 'Loading' : 'OK'}}
+    </button>
+    <button class="btn btn-secondary" ng-click="buffer.cancel()">
+      <i class="fa fa-ban"></i>
+      Cancel
+    </button>
+  </div>
+</div>

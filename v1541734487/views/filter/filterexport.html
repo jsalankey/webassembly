@@ -1,0 +1,40 @@
+<div>
+  <div class="modal-body">
+    <form name="exportForm">
+      <div class="d-flex flex-fill form-group">
+        <label class="col-form-label col-3 text-right u-required">Name</label>
+        <div class="col">
+          <input class="form-control" type="text" name="title" ng-model="filterexport['fileName']" ng-maxlength="200" required />
+          <validation-message target="exportForm.title"></validation-message>
+        </div>
+      </div>
+      <div class="form-check">
+        <div class="ml-2">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="exportmode" value="active" ng-model="filterexport['mode']" checked /> Export active (checked) filters
+          </label>
+        </div>
+        <div class="ml-2">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="exportmode" value="selected" ng-model="filterexport['mode']" checked /> Export selected filters
+          </label>
+        </div>
+        <div class="ml-2">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="exportmode" value="all" ng-model="filterexport['mode']" checked /> Export all filters
+          </label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="filterexport.save()" ng-disabled="exportForm.$invalid">
+      <i class="fa fa-check"></i>
+      OK
+    </button>
+    <button class="btn btn-secondary" ng-click="filterexport.cancel()">
+      <i class="fa fa-ban"></i>
+      Cancel
+    </button>
+  </div>
+</div>

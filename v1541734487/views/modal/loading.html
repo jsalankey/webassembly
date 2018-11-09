@@ -1,0 +1,9 @@
+<div class="animate-fade" ng-show="loadctrl.show">
+  <div class="progress">
+    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated">
+      <span class="c-loading__text-position font-weight-bold">
+        {{message || 'Loading...'}}<span ng-if="!loadctrl.indeterminate"> ({{loadctrl.complete}}%)</span>
+      </span>
+    </div>
+  </div>
+</div>
